@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const { host } = req.headers;
   const { priceId, productId } = req.body;
 
   if (req.method !== "POST")
@@ -18,8 +19,8 @@ export default async function handler(
 
   if (!priceId) return res.status(400).json({ error: "Product not found" });
 
-  const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl = `${process.env.NEXT_URL}/product/${productId}`;
+  const successUrl = `https://www.${host}/success?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `https://www.${host}/product/${productId}`;
 
   const checkoutSession = await stripe.checkout.sessions.create({
     success_url: successUrl,
