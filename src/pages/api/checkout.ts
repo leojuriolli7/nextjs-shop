@@ -19,8 +19,8 @@ export default async function handler(
 
   if (!priceId) return res.status(400).json({ error: "Product not found" });
 
-  const successUrl = `https://www.${host}/success?session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl = `https://www.${host}/product/${productId}`;
+  const successUrl = `https://${host}/success?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `https://${host}/product/${productId}`;
 
   const checkoutSession = await stripe.checkout.sessions.create({
     success_url: successUrl,
