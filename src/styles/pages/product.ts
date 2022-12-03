@@ -14,6 +14,7 @@ export const ProductContainer = styled("main", {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 40,
     gap: "1rem",
     margin: 0,
     width: "100%",
