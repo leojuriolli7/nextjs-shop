@@ -97,6 +97,7 @@ export const ProductsList = styled("div", {
   gap: 24,
   maxHeight: "calc(100vh - 8rem - 150px)",
   overflowY: "auto",
+  overflowX: "hidden",
 
   "&::-webkit-scrollbar": {
     width: 6,

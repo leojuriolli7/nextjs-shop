@@ -1,6 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import ShouldRender from "@components/ShouldRender";
 import useShoppingCartStore from "@state/shoppingCart/cart";
+import autoAnimate from "@formkit/auto-animate";
 import useIsCartMenuVisible from "@state/shoppingCart/menu";
 import { BeatLoader } from "react-spinners";
 import { getColors } from "@utils/getColors";
@@ -16,6 +23,7 @@ const CartMenu: React.FC = () => {
   const { visible, setVisible, canShowCart } = useIsCartMenuVisible();
   const { cart, removeCartItem, resetCart } = useShoppingCartStore();
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const productsListRef = useRef(null);
 
   const isMenuOpen = useMemo(() => {
     if (visible) return "open";
@@ -55,6 +63,10 @@ const CartMenu: React.FC = () => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    productsListRef.current && autoAnimate(productsListRef.current);
+  }, [productsListRef]);
+
   return (
     <S.Container isVisible={isMenuOpen}>
       <S.Content className="cartMenu__content">
@@ -65,34 +77,34 @@ const CartMenu: React.FC = () => {
           <S.NoItemsMessage>Nenhum item na sua sacola</S.NoItemsMessage>
         </ShouldRender>
 
+        <S.ProductsList ref={productsListRef}>
+          {cart?.map((item) => (
+            <S.Product key={item.price}>
+              <S.ImageContainer>
+                <Image
+                  src={item?.imageUrl}
+                  alt={item.name}
+                  width={90}
+                  height={90}
+                />
+              </S.ImageContainer>
+
+              <S.TextSection>
+                <S.Name>{item?.name}</S.Name>
+
+                <S.Price>
+                  {item?.value} <S.Quantity>x {item?.quantity}</S.Quantity>
+                </S.Price>
+
+                <S.Remove onClick={onClickRemoveFromCart(item.price)}>
+                  Remover
+                </S.Remove>
+              </S.TextSection>
+            </S.Product>
+          ))}
+        </S.ProductsList>
+
         <ShouldRender if={!!cart.length}>
-          <S.ProductsList>
-            {cart.map((item) => (
-              <S.Product key={item.price}>
-                <S.ImageContainer>
-                  <Image
-                    src={item?.imageUrl}
-                    alt={item.name}
-                    width={90}
-                    height={90}
-                  />
-                </S.ImageContainer>
-
-                <S.TextSection>
-                  <S.Name>{item?.name}</S.Name>
-
-                  <S.Price>
-                    {item?.value} <S.Quantity>x {item?.quantity}</S.Quantity>
-                  </S.Price>
-
-                  <S.Remove onClick={onClickRemoveFromCart(item.price)}>
-                    Remover
-                  </S.Remove>
-                </S.TextSection>
-              </S.Product>
-            ))}
-          </S.ProductsList>
-
           <S.BuyButton disabled={isRedirecting} onClick={onClickBuyProducts}>
             <ShouldRender if={!isRedirecting}>Comprar agora</ShouldRender>
 
