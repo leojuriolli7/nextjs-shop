@@ -12,6 +12,16 @@ export const globalStyles = globalCss({
     "-webkit-font-smoothing": "antialiased",
   },
 
+  html: {
+    "@media(max-width: 1080px)": {
+      fontSize: "93.75%", // 15px
+    },
+
+    "@media(max-width: 720px)": {
+      fontSize: "87.5%", // 14px
+    },
+  },
+
   "body, input, textarea, button": {
     fontFamily: "Roboto",
     fontWeight: 400,
@@ -19,9 +29,5 @@ export const globalStyles = globalCss({
 
   button: {
     cursor: "pointer",
-  },
-
-  ".keen-slider": {
-    marginRight: 20,
   },
 });

@@ -24,6 +24,20 @@ export default function Home({ products }: Props) {
       perView: 2.5,
       spacing: 48,
     },
+    breakpoints: {
+      "(max-width: 965px)": {
+        slides: {
+          perView: 1.2,
+          spacing: 20,
+        },
+      },
+      "(max-width: 400px)": {
+        slides: {
+          perView: 1,
+          spacing: 10,
+        },
+      },
+    },
   });
 
   return (
@@ -32,28 +46,30 @@ export default function Home({ products }: Props) {
         <title>Home | Ignite Shop</title>
       </Head>
 
-      <S.HomeContainer ref={sliderRef} className="keen-slider">
-        {products?.map((product) => (
-          <Link
-            key={product.id}
-            href={`/product/${product.id}`}
-            className="keen-slider__slide"
-          >
-            <S.Product>
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                width={520}
-                height={480}
-              />
+      <S.HomeContainer>
+        <S.SliderContainer ref={sliderRef} className="keen-slider">
+          {products?.map((product) => (
+            <Link
+              key={product.id}
+              href={`/product/${product.id}`}
+              className="keen-slider__slide"
+            >
+              <S.Product>
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  width={520}
+                  height={480}
+                />
 
-              <S.Footer>
-                <S.ProductName>{product.name}</S.ProductName>
-                <S.ProductPrice>{product.price}</S.ProductPrice>
-              </S.Footer>
-            </S.Product>
-          </Link>
-        ))}
+                <S.Footer>
+                  <S.ProductName>{product.name}</S.ProductName>
+                  <S.ProductPrice>{product.price}</S.ProductPrice>
+                </S.Footer>
+              </S.Product>
+            </Link>
+          ))}
+        </S.SliderContainer>
       </S.HomeContainer>
     </>
   );

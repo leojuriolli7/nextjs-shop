@@ -6,6 +6,27 @@ export const HomeContainer = styled("main", {
   maxWidth: "calc(100vw - ((100vw - 1180px)/2))",
   marginLeft: "auto",
   minHeight: "656px",
+  paddingRight: 20,
+
+  "@media(max-width: 1215px)": {
+    paddingLeft: 20,
+  },
+
+  "@media(max-width: 965px)": {
+    padding: 0,
+    width: "90%",
+    margin: "0 auto",
+  },
+
+  "@media(max-width: 400px)": {
+    minHeight: "initial",
+    height: "fit-content",
+    maxHeight: "-webkit-fill-available",
+  },
+});
+
+export const SliderContainer = styled("div", {
+  width: "100%",
 });
 
 export const Product = styled("div", {
@@ -29,6 +50,13 @@ export const Product = styled("div", {
       opacity: 1,
     },
   },
+
+  "@media(max-width: 965px)": {
+    footer: {
+      transform: "translateY(0%)",
+      opacity: 1,
+    },
+  },
 });
 
 export const Footer = styled("footer", {
@@ -45,11 +73,13 @@ export const Footer = styled("footer", {
   transform: "translateY(110%)",
   opacity: 0,
   transition: "all 0.2s ease-in-out",
+  maxHeight: 89,
 });
 
 export const ProductName = styled("strong", {
   fontSize: "$lg",
   color: "$gray100",
+  marginRight: 5,
 });
 
 export const ProductPrice = styled("span", {

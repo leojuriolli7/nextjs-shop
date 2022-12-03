@@ -7,6 +7,17 @@ export const ProductContainer = styled("main", {
   gap: "4rem",
   maxWidth: 1180,
   margin: "0 auto",
+  width: "95%",
+
+  "@media(max-width: 965px)": {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    margin: 0,
+    width: "100%",
+  },
 });
 
 export const ImageContainer = styled("div", {
@@ -23,11 +34,25 @@ export const ImageContainer = styled("div", {
   img: {
     objectFit: "cover",
   },
+
+  "@media(max-width: 965px)": {
+    width: 300,
+    height: 300,
+
+    img: {
+      width: "100%",
+      height: "auto",
+    },
+  },
 });
 
 export const ProductDetails = styled("div", {
   display: "flex",
   flexDirection: "column",
+
+  "@media(max-width: 965px)": {
+    width: "clamp(260px, 60%, 530px)",
+  },
 });
 
 export const ProductTitle = styled("h1", {
@@ -40,6 +65,10 @@ export const ProductPrice = styled("span", {
   display: "block",
   fontSize: "$xxl",
   color: "$green300",
+
+  "@media(max-width: 965px)": {
+    marginTop: 10,
+  },
 });
 
 export const ProductDescription = styled("p", {
@@ -47,6 +76,10 @@ export const ProductDescription = styled("p", {
   fontSize: "$md",
   lineHeight: 1.6,
   color: "$grey300",
+
+  "@media(max-width: 965px)": {
+    marginTop: 10,
+  },
 });
 
 export const BuyButton = styled("button", {
@@ -66,5 +99,10 @@ export const BuyButton = styled("button", {
   "&:disabled": {
     filter: "opacity(0.6)",
     cursor: "not-allowed",
+  },
+
+  "@media(max-width: 965px)": {
+    order: -1,
+    marginBottom: 20,
   },
 });

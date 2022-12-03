@@ -6,6 +6,10 @@ export const Container = styled("div", {
   alignItems: "flex-start",
   justifyContent: "center",
   minHeight: "100vh",
+
+  "@media(max-width: 965px)": {
+    justifyContent: "flex-start",
+  },
 });
 
 export const Header = styled("header", {
@@ -13,4 +17,9 @@ export const Header = styled("header", {
   width: "100%",
   maxWidth: 1180,
   margin: "0 auto",
+  paddingLeft: 5,
+
+  "@media(max-width: 965px)": {
+    width: "90%",
+  },
 });

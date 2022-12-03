@@ -8,6 +8,10 @@ export const SuccessContainer = styled("main", {
   justifyContent: "center",
   height: 656,
   margin: "0 auto",
+
+  "@media(max-width: 965px)": {
+    justifyContent: "flex-start",
+  },
 });
 
 export const ImageContainer = styled("div", {
@@ -25,6 +29,18 @@ export const ImageContainer = styled("div", {
   img: {
     objectFit: "cover",
   },
+
+  "@media(max-width: 965px)": {
+    marginTop: "2rem",
+    maxWidth: "initial",
+    width: 200,
+    height: 300,
+
+    img: {
+      width: "100%",
+      height: "auto",
+    },
+  },
 });
 
 export const Title = styled("h1", {
@@ -39,6 +55,11 @@ export const Description = styled("p", {
   textAlign: "center",
   lineHeight: 1.4,
   marginTop: "2rem",
+
+  "@media(max-width: 965px)": {
+    margin: "2rem 1rem 0 1rem",
+    fontSize: "$lg",
+  },
 });
 
 export const Highlight = styled("strong", {});
