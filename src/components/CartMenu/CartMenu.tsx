@@ -8,7 +8,8 @@ import React, {
 import ShouldRender from "@components/ShouldRender";
 import useShoppingCartStore from "@state/shoppingCart/cart";
 import autoAnimate from "@formkit/auto-animate";
-import useIsCartMenuVisible from "@state/shoppingCart/menu";
+import Lottie from "react-lottie";
+import useIsCartMenuVisibleStore from "@state/shoppingCart/menu";
 import useGetCartSum from "@hooks/cart/useGetCartSum";
 import { BeatLoader } from "react-spinners";
 import { getColors } from "@utils/getColors";
@@ -17,11 +18,12 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 
 import * as S from "./styles";
+import { LOTTIE_CONFIG } from "./_constants";
 
 const gray300 = getColors("gray300");
 
 const CartMenu: React.FC = () => {
-  const { visible, setVisible, canShowCart } = useIsCartMenuVisible();
+  const { visible, setVisible, canShowCart } = useIsCartMenuVisibleStore();
   const { cart, removeCartItem, resetCart } = useShoppingCartStore();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const productsListRef = useRef(null);
@@ -84,10 +86,22 @@ const CartMenu: React.FC = () => {
     <S.Container isVisible={isMenuOpen}>
       <S.Content className="cartMenu__content">
         <S.CloseIcon onClick={closeMenu} size={30} color={gray300} />
-        <S.Title>Sacola de compras</S.Title>
+        <S.Title>Carrinho de compras</S.Title>
 
         <ShouldRender if={!cart.length}>
-          <S.NoItemsMessage>Nenhum item na sua sacola</S.NoItemsMessage>
+          <S.NoItemsContainer>
+            <Lottie
+              options={LOTTIE_CONFIG}
+              width="clamp(270px, 90%, 370px)"
+              height="auto"
+              style={{ marginTop: 40 }}
+            />
+            <S.NoItemsMessage>
+              Nenhum item no seu carrinho no momento
+            </S.NoItemsMessage>
+
+            <S.NoItemsMessage>Explore a loja e volte aqui!</S.NoItemsMessage>
+          </S.NoItemsContainer>
         </ShouldRender>
 
         <S.ProductsList ref={productsListRef}>

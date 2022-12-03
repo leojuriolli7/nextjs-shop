@@ -7,11 +7,11 @@ type Store = {
   setCanShowCart: (value: boolean) => void;
 };
 
-const useIsCartMenuVisible = create<Store>((set) => ({
+const useIsCartMenuVisibleStore = create<Store>((set) => ({
   visible: false,
   canShowCart: false,
   setVisible: (value: boolean) => set(() => ({ visible: value })),
   setCanShowCart: (value: boolean) => set(() => ({ canShowCart: value })),
 }));
 
-export default useIsCartMenuVisible;
+export default useIsCartMenuVisibleStore;

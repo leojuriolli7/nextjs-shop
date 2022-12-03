@@ -184,10 +184,21 @@ export const FullPrice = styled("p", {
   fontSize: "$xxl",
 });
 
+export const NoItemsContainer = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  flexDirection: "column",
+});
+
 export const NoItemsMessage = styled("p", {
   marginTop: 10,
   color: "$gray100",
-  fontSize: "$md",
+  fontSize: "$lg",
+  textAlign: "center",
+  width: "90%",
+  lineHeight: 1.3,
 });
 
 export const BuyButton = styled("button", {

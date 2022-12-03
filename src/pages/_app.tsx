@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { globalStyles } from "@styles/global";
 import logoImage from "@assets/logo.svg";
-import useIsCartMenuVisible from "@state/shoppingCart/menu";
+import useIsCartMenuVisibleStore from "@state/shoppingCart/menu";
 import { getColors } from "@utils/getColors";
 import { Toaster } from "react-hot-toast";
 import * as S from "@pageStyles/app";
@@ -22,7 +22,7 @@ const gray800 = getColors("gray800");
 const white = getColors("white");
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { setVisible, setCanShowCart } = useIsCartMenuVisible();
+  const { setVisible, setCanShowCart } = useIsCartMenuVisibleStore();
 
   const onClickOpenCartMenu = useCallback(() => {
     setCanShowCart(true);
