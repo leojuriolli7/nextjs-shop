@@ -95,7 +95,7 @@ export const ProductsList = styled("div", {
   display: "flex",
   flexDirection: "column",
   gap: 24,
-  maxHeight: "calc(100vh - 8rem - 150px)",
+  maxHeight: "calc(100vh - 8rem - 245px)",
   overflowY: "auto",
   overflowX: "hidden",
 
@@ -153,6 +153,35 @@ export const Remove = styled("p", {
   "&:hover": {
     color: "$green300",
   },
+});
+
+export const TotalContainer = styled("div", {
+  width: "100%",
+  marginTop: 40,
+});
+
+export const TotalTextContainer = styled("div", {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
+
+export const TotalQuantity = styled("p", {
+  fontSize: "$md",
+  color: "$gray100",
+});
+
+export const FullPriceLabel = styled("p", {
+  color: "$gray100",
+  fontWeight: "bold",
+  fontSize: "$lg",
+});
+
+export const FullPrice = styled("p", {
+  color: "$gray100",
+  fontWeight: "bold",
+  fontSize: "$xxl",
 });
 
 export const NoItemsMessage = styled("p", {

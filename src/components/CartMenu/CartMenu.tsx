@@ -9,6 +9,7 @@ import ShouldRender from "@components/ShouldRender";
 import useShoppingCartStore from "@state/shoppingCart/cart";
 import autoAnimate from "@formkit/auto-animate";
 import useIsCartMenuVisible from "@state/shoppingCart/menu";
+import useGetCartSum from "@hooks/cart/useGetCartSum";
 import { BeatLoader } from "react-spinners";
 import { getColors } from "@utils/getColors";
 import axios from "axios";
@@ -24,6 +25,18 @@ const CartMenu: React.FC = () => {
   const { cart, removeCartItem, resetCart } = useShoppingCartStore();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const productsListRef = useRef(null);
+
+  const totalQuantityOfItemsOnCart = useGetCartSum("quantity");
+  const totalCartValue = useGetCartSum("value");
+
+  const formattedTotalValue = useMemo(
+    () =>
+      new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(totalCartValue / 100),
+    [totalCartValue]
+  );
 
   const isMenuOpen = useMemo(() => {
     if (visible) return "open";
@@ -105,6 +118,18 @@ const CartMenu: React.FC = () => {
         </S.ProductsList>
 
         <ShouldRender if={!!cart.length}>
+          <S.TotalContainer>
+            <S.TotalTextContainer>
+              <S.TotalQuantity>Quantidade</S.TotalQuantity>
+              <S.TotalQuantity>{totalQuantityOfItemsOnCart}</S.TotalQuantity>
+            </S.TotalTextContainer>
+
+            <S.TotalTextContainer style={{ marginTop: 10 }}>
+              <S.FullPriceLabel>Valor total</S.FullPriceLabel>
+              <S.FullPrice>{formattedTotalValue}</S.FullPrice>
+            </S.TotalTextContainer>
+          </S.TotalContainer>
+
           <S.BuyButton disabled={isRedirecting} onClick={onClickBuyProducts}>
             <ShouldRender if={!isRedirecting}>Comprar agora</ShouldRender>
 

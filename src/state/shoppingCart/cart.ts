@@ -1,7 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-type CartItem = {
+export type CartItem = {
   price: string;
   quantity: number;
   name: string;

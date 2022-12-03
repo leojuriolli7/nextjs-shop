@@ -7,6 +7,7 @@ import { stripe } from "@lib/stripe";
 import CustomNumberInput from "@components/CustomNumberInput";
 import Stripe from "stripe";
 import { toast } from "react-hot-toast";
+import useGetCartSum from "@hooks/cart/useGetCartSum";
 import useShoppingCartStore from "@state/shoppingCart/cart";
 import * as S from "@styles/pages/product";
 
@@ -25,20 +26,17 @@ export default function Product({ product }: Props) {
   const [quantity, setQuantity] = useState(1);
   const { isFallback, query } = useRouter();
   const { setCartItem, cart } = useShoppingCartStore();
+  const quantityOfItemsAlreadyOnCart = useGetCartSum("quantity");
   const priceId = product?.defaultPriceId ?? query.id;
 
   const addProductToCart = useCallback(() => {
     if (cart.length) {
-      const quantityOfItemsAlreadyOnCart = cart
-        .map((item) => item.quantity)
-        .reduce((acc, currentValue) => acc + currentValue);
-
       const MAX_ITEMS_POSSIBLE_FOR_A_CHECKOUT_ON_STRIPE_API = 100;
       if (
         quantityOfItemsAlreadyOnCart + quantity >
         MAX_ITEMS_POSSIBLE_FOR_A_CHECKOUT_ON_STRIPE_API
       )
-        return toast.error("Muitos itens no carrinho, limite de 100");
+        return toast.error("Coloque no máximo 100 itens no carrinho");
     }
 
     const cartItem = {

@@ -9,6 +9,7 @@
       "@state/*": ["src/state/*"],
       "@lib/*": ["src/lib/*"],
       "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@components/*": ["src/components/*"]
     }
   }
