@@ -9,7 +9,7 @@ export const ProductContainer = styled("main", {
   margin: "0 auto",
   width: "95%",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -36,7 +36,7 @@ export const ImageContainer = styled("div", {
     objectFit: "cover",
   },
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     width: 300,
     height: 300,
 
@@ -51,7 +51,7 @@ export const ProductDetails = styled("div", {
   display: "flex",
   flexDirection: "column",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     width: "clamp(260px, 60%, 530px)",
   },
 });
@@ -67,7 +67,7 @@ export const ProductPrice = styled("span", {
   fontSize: "$xxl",
   color: "$green300",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     marginTop: 10,
   },
 });
@@ -78,7 +78,7 @@ export const ProductDescription = styled("p", {
   lineHeight: 1.6,
   color: "$grey300",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     marginTop: 10,
   },
 });
@@ -102,7 +102,7 @@ export const BuyButton = styled("button", {
     cursor: "not-allowed",
   },
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     order: -1,
     marginBottom: 20,
   },

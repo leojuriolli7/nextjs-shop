@@ -32,4 +32,8 @@ export const {
       xxl: "2rem",
     },
   },
+
+  media: {
+    mobile: "(max-width: 965px)",
+  },
 });

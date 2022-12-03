@@ -7,8 +7,9 @@ export const Container = styled("div", {
   justifyContent: "center",
   minHeight: "100vh",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     justifyContent: "flex-start",
+    minHeight: "auto",
   },
 });
 
@@ -19,7 +20,7 @@ export const Header = styled("header", {
   margin: "0 auto",
   paddingLeft: 5,
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     width: "90%",
   },
 });

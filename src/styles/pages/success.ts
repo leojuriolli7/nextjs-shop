@@ -9,7 +9,7 @@ export const SuccessContainer = styled("main", {
   height: 656,
   margin: "0 auto",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     justifyContent: "flex-start",
   },
 });
@@ -30,7 +30,7 @@ export const ImageContainer = styled("div", {
     objectFit: "cover",
   },
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     marginTop: "2rem",
     maxWidth: "initial",
     width: 200,
@@ -56,7 +56,7 @@ export const Description = styled("p", {
   lineHeight: 1.4,
   marginTop: "2rem",
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     margin: "2rem 1rem 0 1rem",
     fontSize: "$lg",
   },

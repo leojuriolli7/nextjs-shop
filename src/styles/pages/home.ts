@@ -12,13 +12,10 @@ export const HomeContainer = styled("main", {
     paddingLeft: 20,
   },
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     padding: 0,
     width: "90%",
     margin: "0 auto",
-  },
-
-  "@media(max-width: 400px)": {
     minHeight: "initial",
     height: "fit-content",
     maxHeight: "-webkit-fill-available",
@@ -51,7 +48,7 @@ export const Product = styled("div", {
     },
   },
 
-  "@media(max-width: 965px)": {
+  "@mobile": {
     footer: {
       transform: "translateY(0%)",
       opacity: 1,
