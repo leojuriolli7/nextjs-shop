@@ -52,7 +52,7 @@ export const ProductDetails = styled("div", {
   flexDirection: "column",
 
   "@mobile": {
-    width: "clamp(260px, 60%, 530px)",
+    width: "clamp(300px, 60%, 530px)",
   },
 });
 
@@ -83,8 +83,23 @@ export const ProductDescription = styled("p", {
   },
 });
 
-export const BuyButton = styled("button", {
+export const BottomSectionContainer = styled("div", {
   marginTop: "auto",
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "flex-end",
+  gap: 10,
+
+  "@mobile": {
+    order: -1,
+    marginBottom: 20,
+    alignItems: "flex-start",
+  },
+});
+
+export const BuyButton = styled("button", {
   backgroundColor: "$green500",
   border: 0,
   color: "$white",
@@ -92,18 +107,14 @@ export const BuyButton = styled("button", {
   padding: "1.25rem",
   fontWeight: "bold",
   fontSize: "$md",
+  width: "100%",
 
   "&:hover": {
-    filter: "brightness(0.8)",
+    filter: "brightness(1.1)",
   },
 
   "&:disabled": {
     filter: "opacity(0.6)",
     cursor: "not-allowed",
-  },
-
-  "@mobile": {
-    order: -1,
-    marginBottom: 20,
   },
 });

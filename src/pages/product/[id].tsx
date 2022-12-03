@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import * as S from "@styles/pages/product";
-import axios from "axios";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import React, { useCallback, useMemo, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { stripe } from "src/lib/stripe";
-import Stripe from "stripe";
+import Image from "next/image";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { stripe } from "@lib/stripe";
+import CustomNumberInput from "@components/CustomNumberInput";
+import Stripe from "stripe";
+import { toast } from "react-hot-toast";
+import useShoppingCartStore from "@state/shoppingCart/cart";
+import * as S from "@styles/pages/product";
 
 type Props = {
   product: {
@@ -20,26 +22,36 @@ type Props = {
 };
 
 export default function Product({ product }: Props) {
-  const { isFallback } = useRouter();
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const { isFallback, query } = useRouter();
+  const { setCartItem, cart } = useShoppingCartStore();
+  const priceId = product?.defaultPriceId ?? query.id;
 
-  const handleBuyProduct = async () => {
-    try {
-      setIsRedirecting(true);
+  const addProductToCart = useCallback(() => {
+    if (cart.length) {
+      const quantityOfItemsAlreadyOnCart = cart
+        .map((item) => item.quantity)
+        .reduce((acc, currentValue) => acc + currentValue);
 
-      const response = await axios.post("/api/checkout", {
-        priceId: product.defaultPriceId,
-        productId: product.id,
-      });
-
-      const { checkoutUrl } = response.data;
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      console.log("err", err);
-      alert("falha ao redirecionar ao checkout");
-      setIsRedirecting(false);
+      const MAX_ITEMS_POSSIBLE_FOR_A_CHECKOUT_ON_STRIPE_API = 100;
+      if (
+        quantityOfItemsAlreadyOnCart + quantity >
+        MAX_ITEMS_POSSIBLE_FOR_A_CHECKOUT_ON_STRIPE_API
+      )
+        return toast.error("Muitos itens no carrinho, limite de 100");
     }
-  };
+
+    const cartItem = {
+      price: priceId,
+      quantity,
+      imageUrl: product?.imageUrl,
+      name: product?.name,
+      value: product?.price,
+    };
+
+    toast.success("Item adicionado ao carrinho");
+    setCartItem(cartItem);
+  }, [quantity, cart, priceId]);
 
   if (isFallback) return <h1>Loading...</h1>;
 
@@ -64,9 +76,13 @@ export default function Product({ product }: Props) {
 
           <S.ProductDescription>{product?.description}</S.ProductDescription>
 
-          <S.BuyButton disabled={isRedirecting} onClick={handleBuyProduct}>
-            Comprar agora
-          </S.BuyButton>
+          <S.BottomSectionContainer>
+            <CustomNumberInput value={quantity} setValue={setQuantity} />
+
+            <S.BuyButton onClick={addProductToCart}>
+              Adicionar ao carrinho
+            </S.BuyButton>
+          </S.BottomSectionContainer>
         </S.ProductDetails>
       </S.ProductContainer>
     </>

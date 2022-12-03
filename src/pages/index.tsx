@@ -1,13 +1,13 @@
 import React from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { useKeenSlider } from "keen-slider/react";
-import { stripe } from "src/lib/stripe";
-import * as S from "@pageStyles/home";
-import "keen-slider/keen-slider.min.css";
-import Stripe from "stripe";
 import Head from "next/head";
+import Image from "next/image";
+import { stripe } from "@lib/stripe";
+import Stripe from "stripe";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import * as S from "@pageStyles/home";
 
 type Props = {
   products: {

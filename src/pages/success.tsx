@@ -1,20 +1,24 @@
 import React from "react";
-import * as S from "@pageStyles/success";
-import Image from "next/image";
 import { GetServerSideProps } from "next";
-import { stripe } from "src/lib/stripe";
-import Stripe from "stripe";
 import Head from "next/head";
+import Image from "next/image";
+import Stripe from "stripe";
+import { stripe } from "@lib/stripe";
+import * as S from "@pageStyles/success";
+
+type Product = {
+  name: string;
+  imageUrl: string;
+  quantity: number;
+};
 
 type SuccessProps = {
   customerName: string;
-  product: {
-    name: string;
-    imageUrl: string;
-  };
+  totalQuantity: number;
+  products: Product[];
 };
 
-export default function Success({ customerName, product }: SuccessProps) {
+export default function Success({ customerName, products }: SuccessProps) {
   return (
     <>
       <Head>
@@ -25,19 +29,28 @@ export default function Success({ customerName, product }: SuccessProps) {
       <S.SuccessContainer>
         <S.Title>Compra efetuada!</S.Title>
 
-        <S.ImageContainer>
-          <Image
-            src={product?.imageUrl}
-            width={120}
-            height={110}
-            alt={product?.name}
-          />
-        </S.ImageContainer>
+        <S.ProductsList>
+          {products?.map((product) => (
+            <S.Product key={product.name}>
+              <S.ImageContainer>
+                <Image
+                  src={product?.imageUrl}
+                  width={120}
+                  height={110}
+                  alt={product?.name}
+                />
+              </S.ImageContainer>
+
+              <S.Name>
+                {product?.name} <S.Quantity>x {product?.quantity}</S.Quantity>
+              </S.Name>
+            </S.Product>
+          ))}
+        </S.ProductsList>
 
         <S.Description>
-          Uhuul <S.Highlight>{customerName}</S.Highlight>, sua{" "}
-          <S.Highlight>{product?.name}</S.Highlight> já está a caminho de sua
-          casa.
+          Uhuul <S.Highlight>{customerName}</S.Highlight>, seus produtos já
+          estão a caminho da sua casa.
         </S.Description>
 
         <S.BackToHome href="/">Voltar ao catálogo</S.BackToHome>
@@ -63,16 +76,23 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
 
   const customerName = session.customer_details?.name;
-  const product = session.line_items?.data?.[0]?.price
-    ?.product as Stripe.Product;
+  const lineItems = session.line_items?.data;
+
+  const filteredProducts = lineItems?.map((item) => {
+    const price = item.price as Stripe.Price;
+    const product = price.product as Stripe.Product;
+
+    return {
+      name: product.name,
+      imageUrl: product.images[0],
+      quantity: item.quantity,
+    };
+  });
 
   return {
     props: {
       customerName,
-      product: {
-        name: product.name,
-        imageUrl: product.images[0],
-      },
+      products: filteredProducts,
     },
   };
 };

@@ -26,6 +26,7 @@ export const {
       purple500: "#7465d4",
     },
     fontSizes: {
+      sm: "0.8rem",
       md: "1.125rem",
       lg: "1.25rem",
       xl: "1.5rem",

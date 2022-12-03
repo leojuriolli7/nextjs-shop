@@ -11,41 +11,81 @@ export const SuccessContainer = styled("main", {
 
   "@mobile": {
     justifyContent: "flex-start",
-  },
-});
-
-export const ImageContainer = styled("div", {
-  width: "100%",
-  maxWidth: 130,
-  height: 145,
-  background: "linear-gradient(180deg, $green500 0%, $purple500 100%)",
-  borderRadius: 8,
-  padding: "0.25rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginTop: "4rem",
-
-  img: {
-    objectFit: "cover",
-  },
-
-  "@mobile": {
-    marginTop: "2rem",
-    maxWidth: "initial",
-    width: 200,
-    height: 300,
-
-    img: {
-      width: "100%",
-      height: "auto",
-    },
+    height: "auto",
+    paddingBottom: "2rem",
   },
 });
 
 export const Title = styled("h1", {
   fontSize: "$xxl",
   color: "$gray100",
+});
+
+export const ProductsList = styled("div", {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: 24,
+  maxHeight: "420px",
+  overflowY: "auto",
+  background: "$gray800",
+  padding: "2rem",
+  borderRadius: 20,
+  marginTop: "2rem",
+
+  "&::-webkit-scrollbar": {
+    width: 6,
+  },
+
+  "&::-webkit-scrollbar-thumb": {
+    borderRadius: 5,
+    background: "$green500",
+  },
+
+  "&::-webkit-scrollbar-track": {
+    background: "$gray800",
+    borderRadius: 10,
+  },
+
+  "@mobile": {
+    gridTemplateColumns: "1fr",
+    width: "auto",
+  },
+});
+
+export const ImageContainer = styled("div", {
+  width: "100%",
+  maxWidth: 130,
+  height: 130,
+  background: "linear-gradient(180deg, $green500 0%, $purple500 100%)",
+  borderRadius: 8,
+  padding: "0.25rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+
+  img: {
+    objectFit: "cover",
+  },
+});
+
+export const Product = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+  gap: 20,
+});
+
+export const Name = styled("p", {
+  fontSize: "$md",
+  color: "$gray300",
+});
+
+export const Quantity = styled("span", {
+  fontSize: "$sm",
+  color: "$green300",
+  fontWeight: "bold",
 });
 
 export const Description = styled("p", {
