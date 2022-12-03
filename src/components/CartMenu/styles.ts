@@ -63,6 +63,9 @@ export const ImageContainer = styled("div", {
   height: 93,
   background: "linear-gradient(180deg, $green500 0%, $purple500 100%)",
   borderRadius: 8,
+
+  minHeight: 93,
+  minWidth: 100,
 });
 
 export const Content = styled("div", {
