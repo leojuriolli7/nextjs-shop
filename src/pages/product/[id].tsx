@@ -60,7 +60,7 @@ export default function Product({ product }: Props) {
 
         <S.ProductDetails>
           <S.ProductTitle>{product?.name}</S.ProductTitle>
-          <S.ProductPrice>R$ 67.00</S.ProductPrice>
+          <S.ProductPrice>{product.price}</S.ProductPrice>
 
           <S.ProductDescription>{product?.description}</S.ProductDescription>
 
