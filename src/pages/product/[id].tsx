@@ -63,7 +63,7 @@ const Product: NextPage<Props> = ({ product }) => {
   return (
     <>
       <Head>
-        <title>{`${product.name} | Ignite Shop`}</title>
+        <title>{`${product?.name} | Ignite Shop`}</title>
       </Head>
       <S.ProductContainer>
         <S.ImageContainer>
