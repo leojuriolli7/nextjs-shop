@@ -62,9 +62,11 @@ const Product: NextPage<Props> = ({ product }) => {
 
   return (
     <>
-      <Head>
-        <title>{`${product?.name} | Ignite Shop`}</title>
-      </Head>
+      <ShouldRender if={product?.name}>
+        <Head>
+          <title>{product?.name}</title>
+        </Head>
+      </ShouldRender>
       <S.ProductContainer>
         <S.ImageContainer>
           <ShouldRender if={!isLoading}>

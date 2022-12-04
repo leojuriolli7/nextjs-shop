@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import * as S from "@pageStyles/app";
 import { useCallback } from "react";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 // Stops hydration error (https://nextjs.org/docs/messages/react-hydration-error)
 const CartMenu = dynamic(() => import("@components/CartMenu"), {
@@ -30,31 +31,36 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [setCanShowCart, setVisible]);
 
   return (
-    <S.Container>
-      <S.Header>
-        <Link href="/">
-          <Image src={logoImage} alt="Logo image" />
-        </Link>
+    <>
+      <Head>
+        <title>Ignite Shop</title>
+      </Head>
+      <S.Container>
+        <S.Header>
+          <Link href="/">
+            <Image src={logoImage} alt="Logo image" />
+          </Link>
 
-        <S.CartIconContainer onClick={onClickOpenCartMenu}>
-          <S.CartIcon size={24} color={gray100} />
-        </S.CartIconContainer>
-      </S.Header>
+          <S.CartIconContainer onClick={onClickOpenCartMenu}>
+            <S.CartIcon size={24} color={gray100} />
+          </S.CartIconContainer>
+        </S.Header>
 
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          style: {
-            backgroundColor: gray800,
-            color: white,
-          },
-        }}
-      />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              backgroundColor: gray800,
+              color: white,
+            },
+          }}
+        />
 
-      <CartMenu />
+        <CartMenu />
 
-      <Component {...pageProps} />
-    </S.Container>
+        <Component {...pageProps} />
+      </S.Container>
+    </>
   );
 };
 
