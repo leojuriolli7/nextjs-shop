@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -19,7 +19,7 @@ type SuccessProps = {
 };
 
 const Success: NextPage<SuccessProps> = ({ customerName, products }) => {
-  const isSingleProduct = useMemo(() => products?.length === 1, [products]);
+  const isSingleProduct = products?.length === 1;
 
   return (
     <>
