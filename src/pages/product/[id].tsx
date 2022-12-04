@@ -88,12 +88,12 @@ const Product: NextPage<Props> = ({ product }) => {
               <Shimmer style={{ width: 100, height: 30 }} />
             </ShouldRender>
 
-            <ShouldRender if={!isLoading}>{product.price}</ShouldRender>
+            <ShouldRender if={!isLoading}>{product?.price}</ShouldRender>
           </S.ProductPrice>
 
           <S.ProductDescription>
             <ShouldRender if={isLoading}>
-              {Array.from({ length: 5 }).map((shimmer, i) => (
+              {Array.from({ length: 5 }).map((_, i) => (
                 <Shimmer
                   key={i}
                   style={{ width: "100%", height: 15, marginTop: 10 }}

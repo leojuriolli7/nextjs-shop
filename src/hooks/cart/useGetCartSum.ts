@@ -17,7 +17,7 @@ const useGetCartSum = (key: "quantity" | "value") => {
         0
       ),
 
-    [cart, key]
+    [cart, isValueSum, key]
   );
 
   return sumOfValueOrQuantity;
