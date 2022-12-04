@@ -67,42 +67,45 @@ const Product: NextPage<Props> = ({ product }) => {
       </Head>
       <S.ProductContainer>
         <S.ImageContainer>
-          <Image
-            src={product?.imageUrl}
-            alt={product?.name}
-            width={580}
-            height={420}
-          />
+          <ShouldRender if={!isLoading}>
+            <Image
+              src={product?.imageUrl}
+              alt={product?.name}
+              width={580}
+              height={420}
+            />
+          </ShouldRender>
         </S.ImageContainer>
 
         <S.ProductDetails>
-          <S.ProductTitle>
-            <ShouldRender if={isLoading}>
-              <Shimmer style={{ width: 260, height: 30 }} />
-            </ShouldRender>
+          <ShouldRender if={isLoading}>
+            <Shimmer style={{ width: 260, height: 30 }} />
+          </ShouldRender>
 
-            <ShouldRender if={!isLoading}>{product?.name}</ShouldRender>
-          </S.ProductTitle>
-          <S.ProductPrice>
-            <ShouldRender if={isLoading}>
-              <Shimmer style={{ width: 100, height: 30 }} />
-            </ShouldRender>
+          <ShouldRender if={!isLoading}>
+            <S.ProductTitle>{product?.name}</S.ProductTitle>
+          </ShouldRender>
 
-            <ShouldRender if={!isLoading}>{product?.price}</ShouldRender>
-          </S.ProductPrice>
+          <ShouldRender if={isLoading}>
+            <Shimmer style={{ width: 100, height: 30, marginTop: 20 }} />
+          </ShouldRender>
 
-          <S.ProductDescription>
-            <ShouldRender if={isLoading}>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Shimmer
-                  key={i}
-                  style={{ width: "100%", height: 15, marginTop: 10 }}
-                />
-              ))}
-            </ShouldRender>
+          <ShouldRender if={!isLoading}>
+            <S.ProductPrice>{product?.price}</S.ProductPrice>
+          </ShouldRender>
 
-            <ShouldRender if={!isLoading}>{product?.description}</ShouldRender>
-          </S.ProductDescription>
+          <ShouldRender if={!isLoading}>
+            <S.ProductDescription>{product?.description}</S.ProductDescription>
+          </ShouldRender>
+
+          <ShouldRender if={isLoading}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Shimmer
+                key={i}
+                style={{ width: "100%", height: 15, marginTop: 10 }}
+              />
+            ))}
+          </ShouldRender>
 
           <S.BottomSectionContainer>
             <CustomNumberInput value={quantity} setValue={setQuantity} />
