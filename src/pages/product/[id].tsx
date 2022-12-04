@@ -7,6 +7,8 @@ import { stripe } from "@lib/stripe";
 import CustomNumberInput from "@components/CustomNumberInput";
 import Stripe from "stripe";
 import { toast } from "react-hot-toast";
+import ShouldRender from "@components/ShouldRender";
+import Shimmer from "@components/Shimmer";
 import useGetCartSum from "@hooks/cart/useGetCartSum";
 import useShoppingCartStore from "@state/shoppingCart/cart";
 import * as S from "@styles/pages/product";
@@ -24,7 +26,7 @@ type Props = {
 
 const Product: NextPage<Props> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const { isFallback, query } = useRouter();
+  const { query, isFallback: isLoading } = useRouter();
   const { setCartItem, cart } = useShoppingCartStore();
   const quantityOfItemsAlreadyOnCart = useGetCartSum("quantity");
   const priceId = product?.defaultPriceId ?? query.id;
@@ -58,8 +60,6 @@ const Product: NextPage<Props> = ({ product }) => {
     quantityOfItemsAlreadyOnCart,
   ]);
 
-  if (isFallback) return <h1>Loading...</h1>;
-
   return (
     <>
       <Head>
@@ -76,15 +76,38 @@ const Product: NextPage<Props> = ({ product }) => {
         </S.ImageContainer>
 
         <S.ProductDetails>
-          <S.ProductTitle>{product?.name}</S.ProductTitle>
-          <S.ProductPrice>{product.price}</S.ProductPrice>
+          <S.ProductTitle>
+            <ShouldRender if={isLoading}>
+              <Shimmer style={{ width: 260, height: 30 }} />
+            </ShouldRender>
 
-          <S.ProductDescription>{product?.description}</S.ProductDescription>
+            <ShouldRender if={!isLoading}>{product?.name}</ShouldRender>
+          </S.ProductTitle>
+          <S.ProductPrice>
+            <ShouldRender if={isLoading}>
+              <Shimmer style={{ width: 100, height: 30 }} />
+            </ShouldRender>
+
+            <ShouldRender if={!isLoading}>{product.price}</ShouldRender>
+          </S.ProductPrice>
+
+          <S.ProductDescription>
+            <ShouldRender if={isLoading}>
+              {Array.from({ length: 5 }).map((shimmer, i) => (
+                <Shimmer
+                  key={i}
+                  style={{ width: "100%", height: 15, marginTop: 10 }}
+                />
+              ))}
+            </ShouldRender>
+
+            <ShouldRender if={!isLoading}>{product?.description}</ShouldRender>
+          </S.ProductDescription>
 
           <S.BottomSectionContainer>
             <CustomNumberInput value={quantity} setValue={setQuantity} />
 
-            <S.BuyButton onClick={addProductToCart}>
+            <S.BuyButton disabled={isLoading} onClick={addProductToCart}>
               Adicionar ao carrinho
             </S.BuyButton>
           </S.BottomSectionContainer>
