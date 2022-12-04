@@ -1,5 +1,5 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
@@ -18,7 +18,7 @@ type Props = {
   }[];
 };
 
-export default function Home({ products }: Props) {
+const Home: NextPage<Props> = ({ products }) => {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2.5,
@@ -73,7 +73,7 @@ export default function Home({ products }: Props) {
       </S.HomeContainer>
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
@@ -105,3 +105,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60 * 60 * 2, // 2 Hours
   };
 };
+
+export default Home;

@@ -48,11 +48,11 @@ const CartMenu: React.FC = () => {
     return undefined;
   }, [visible, canShowCart]);
 
-  const closeMenu = useCallback(() => setVisible(false), []);
+  const closeMenu = useCallback(() => setVisible(false), [setVisible]);
 
   const onClickRemoveFromCart = useCallback(
     (itemId: string) => () => removeCartItem(itemId),
-    []
+    [removeCartItem]
   );
 
   const onClickBuyProducts = useCallback(async () => {
@@ -76,7 +76,7 @@ const CartMenu: React.FC = () => {
       toast.error("Falha ao redirecionar ao checkout");
       setIsRedirecting(false);
     }
-  }, [cart]);
+  }, [cart, resetCart, setVisible]);
 
   useEffect(() => {
     productsListRef.current && autoAnimate(productsListRef.current);

@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { getCssText } from "../styles";
 
-export default function Document() {
+const Document = () => {
   return (
     <Html>
       <Head>
@@ -29,4 +29,6 @@ export default function Document() {
       </body>
     </Html>
   );
-}
+};
+
+export default Document;

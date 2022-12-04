@@ -1,5 +1,5 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Stripe from "stripe";
@@ -18,7 +18,7 @@ type SuccessProps = {
   products: Product[];
 };
 
-export default function Success({ customerName, products }: SuccessProps) {
+const Success: NextPage<SuccessProps> = ({ customerName, products }) => {
   return (
     <>
       <Head>
@@ -57,7 +57,7 @@ export default function Success({ customerName, products }: SuccessProps) {
       </S.SuccessContainer>
     </>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const sessionId = query.session_id as string;
@@ -96,3 +96,5 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
+
+export default Success;

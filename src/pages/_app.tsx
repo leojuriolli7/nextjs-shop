@@ -21,13 +21,13 @@ const gray100 = getColors("gray100");
 const gray800 = getColors("gray800");
 const white = getColors("white");
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const { setVisible, setCanShowCart } = useIsCartMenuVisibleStore();
 
   const onClickOpenCartMenu = useCallback(() => {
     setCanShowCart(true);
     setVisible(true);
-  }, []);
+  }, [setCanShowCart, setVisible]);
 
   return (
     <S.Container>
@@ -56,4 +56,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </S.Container>
   );
-}
+};
+
+export default App;

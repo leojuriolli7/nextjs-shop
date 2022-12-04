@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import React, { useCallback, useState } from "react";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ type Props = {
   };
 };
 
-export default function Product({ product }: Props) {
+const Product: NextPage<Props> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const { isFallback, query } = useRouter();
   const { setCartItem, cart } = useShoppingCartStore();
@@ -49,7 +49,14 @@ export default function Product({ product }: Props) {
 
     toast.success("Item adicionado ao carrinho");
     setCartItem(cartItem);
-  }, [quantity, cart, priceId]);
+  }, [
+    cart.length,
+    priceId,
+    quantity,
+    product,
+    setCartItem,
+    quantityOfItemsAlreadyOnCart,
+  ]);
 
   if (isFallback) return <h1>Loading...</h1>;
 
@@ -85,7 +92,7 @@ export default function Product({ product }: Props) {
       </S.ProductContainer>
     </>
   );
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -124,3 +131,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60 * 60 * 1, // 1 Hour
   };
 };
+
+export default Product;
