@@ -23,15 +23,35 @@ export const Title = styled("h1", {
 
 export const ProductsList = styled("div", {
   width: "100%",
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: 24,
   maxHeight: "420px",
   overflowY: "auto",
   background: "$gray800",
   padding: "2rem",
   borderRadius: 20,
   marginTop: "2rem",
+
+  "@mobile": {
+    width: "auto",
+  },
+
+  variants: {
+    numberOfItems: {
+      single: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      multiple: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 24,
+
+        "@mobile": {
+          gridTemplateColumns: "1fr",
+        },
+      },
+    },
+  },
 
   "&::-webkit-scrollbar": {
     width: 6,
@@ -45,11 +65,6 @@ export const ProductsList = styled("div", {
   "&::-webkit-scrollbar-track": {
     background: "$gray800",
     borderRadius: 10,
-  },
-
-  "@mobile": {
-    gridTemplateColumns: "1fr",
-    width: "auto",
   },
 });
 

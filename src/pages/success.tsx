@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -19,6 +19,8 @@ type SuccessProps = {
 };
 
 const Success: NextPage<SuccessProps> = ({ customerName, products }) => {
+  const isSingleProduct = useMemo(() => products?.length === 1, [products]);
+
   return (
     <>
       <Head>
@@ -29,7 +31,7 @@ const Success: NextPage<SuccessProps> = ({ customerName, products }) => {
       <S.SuccessContainer>
         <S.Title>Compra efetuada!</S.Title>
 
-        <S.ProductsList>
+        <S.ProductsList numberOfItems={isSingleProduct ? "single" : "multiple"}>
           {products?.map((product) => (
             <S.Product key={product.name}>
               <S.ImageContainer>
