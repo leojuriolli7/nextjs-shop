@@ -1,13 +1,13 @@
 import React from "react";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
-import Head from "next/head";
 import Image from "next/image";
 import { stripe } from "@lib/stripe";
 import Stripe from "stripe";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import * as S from "@pageStyles/home";
+import MetaTags from "@components/MetaTags";
 
 type Props = {
   products: {
@@ -42,9 +42,7 @@ const Home: NextPage<Props> = ({ products }) => {
 
   return (
     <>
-      <Head>
-        <title>Home | Ignite Shop</title>
-      </Head>
+      <MetaTags title="Home | Ignite Shop" />
 
       <S.HomeContainer>
         <S.SliderContainer ref={sliderRef} className="keen-slider">

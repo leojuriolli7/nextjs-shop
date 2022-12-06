@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 import * as S from "@pageStyles/app";
 import { useCallback } from "react";
 import dynamic from "next/dynamic";
-import Head from "next/head";
+import MetaTags from "@components/MetaTags";
 
 // Stops hydration error (https://nextjs.org/docs/messages/react-hydration-error)
 const CartMenu = dynamic(() => import("@components/CartMenu"), {
@@ -32,9 +32,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <Head>
-        <title>Ignite Shop</title>
-      </Head>
+      <MetaTags
+        title="Ignite Shop"
+        description="Buy your favourite shirts here!"
+      />
       <S.Container>
         <S.Header>
           <Link href="/">

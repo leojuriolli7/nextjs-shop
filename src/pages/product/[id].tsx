@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { stripe } from "@lib/stripe";
 import CustomNumberInput from "@components/CustomNumberInput";
@@ -12,6 +11,7 @@ import Shimmer from "@components/Shimmer";
 import useGetCartSum from "@hooks/cart/useGetCartSum";
 import useShoppingCartStore from "@state/shoppingCart/cart";
 import * as S from "@styles/pages/product";
+import MetaTags from "@components/MetaTags";
 
 type Props = {
   product: {
@@ -63,9 +63,11 @@ const Product: NextPage<Props> = ({ product }) => {
   return (
     <>
       <ShouldRender if={product?.name}>
-        <Head>
-          <title>{product?.name}</title>
-        </Head>
+        <MetaTags
+          title={product?.name}
+          image={product?.imageUrl}
+          description={product?.description}
+        />
       </ShouldRender>
       <S.ProductContainer>
         <S.ImageContainer>
