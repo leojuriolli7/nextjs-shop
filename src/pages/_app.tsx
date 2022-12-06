@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Link from "next/link";
 import Image from "next/image";
 import { globalStyles } from "@styles/global";
-import logoImage from "@assets/logo.svg";
+import logoImage from "@assets/images/logo.svg";
 import useIsCartMenuVisibleStore from "@state/shoppingCart/menu";
 import { getColors } from "@utils/getColors";
 import { Toaster } from "react-hot-toast";
@@ -35,6 +35,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <MetaTags
         title="Ignite Shop"
         description="Buy your favourite shirts here!"
+        url={process.env.NEXT_PUBLIC_APP_URL}
       />
       <S.Container>
         <S.Header>
