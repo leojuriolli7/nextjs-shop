@@ -9,7 +9,7 @@ type Props = {
 };
 
 const MetaTags: React.FC<Props> = ({ title, description, image, url }) => {
-  const DEFAULT_IMAGE_URL = `https://${process.env.NEXT_PUBLIC_APP_URL}/assets/images/small-logo.png`;
+  const DEFAULT_IMAGE_URL = `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/small-logo.png`;
 
   const currentTitle = title || "Ignite Shop";
   const currentDescription = description || "Buy your favourite shirts here!";
