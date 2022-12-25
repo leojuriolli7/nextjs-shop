@@ -84,31 +84,23 @@ const Product: NextPage<Props> = ({ product }) => {
         <S.ProductDetails>
           <ShouldRender if={isLoading}>
             <Shimmer style={{ width: 260, height: 30 }} />
-          </ShouldRender>
 
-          <ShouldRender if={!isLoading}>
-            <S.ProductTitle>{product?.name}</S.ProductTitle>
-          </ShouldRender>
-
-          <ShouldRender if={isLoading}>
             <Shimmer style={{ width: 100, height: 30, marginTop: 20 }} />
-          </ShouldRender>
 
-          <ShouldRender if={!isLoading}>
-            <S.ProductPrice>{product?.price}</S.ProductPrice>
-          </ShouldRender>
-
-          <ShouldRender if={!isLoading}>
-            <S.ProductDescription>{product?.description}</S.ProductDescription>
-          </ShouldRender>
-
-          <ShouldRender if={isLoading}>
             {Array.from({ length: 5 }).map((_, i) => (
               <Shimmer
                 key={i}
                 style={{ width: "100%", height: 15, marginTop: 10 }}
               />
             ))}
+          </ShouldRender>
+
+          <ShouldRender if={!isLoading}>
+            <S.ProductTitle>{product?.name}</S.ProductTitle>
+
+            <S.ProductPrice>{product?.price}</S.ProductPrice>
+
+            <S.ProductDescription>{product?.description}</S.ProductDescription>
           </ShouldRender>
 
           <S.BottomSectionContainer>
